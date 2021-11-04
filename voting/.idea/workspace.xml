@@ -4,7 +4,21 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="43496402-0e24-4d7d-90f6-98cbcb9f3266" name="Changes" comment="" />
+    <list default="true" id="43496402-0e24-4d7d-90f6-98cbcb9f3266" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Keys/N0/N0_RSA_PIV" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Keys/N0/N0_RSA_PUB" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Keys/N1/N1_RSA_PIV" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Keys/N1/N1_RSA_PUB" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Keys/N2/N2_RSA_PIV" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Keys/N2/N2_RSA_PUB" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Keys/N3/N3_RSA_PIV" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Keys/N3/N3_RSA_PUB" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Keys/N4/N4_RSA_PIV" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Keys/N4/N4_RSA_PUB" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/rsa.go" beforeDir="false" afterPath="$PROJECT_DIR$/rsa.go" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
