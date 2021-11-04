@@ -6,7 +6,9 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"math/big"
 	"strconv"
+	"strings"
 	"sync"
 )
 
@@ -196,8 +198,27 @@ func (p *pbft) handlePrepare(content []byte) {
 	}
 }
 
+
+var receivedEncryptedData string
+var decryptedData string
+var c1_i int64
+var c2_i int64
 //处理提交确认消息
 func (p *pbft) handleCommit(content []byte) {
+	gHex, _ := randomHex(42)
+	pHex, _ := randomHex(42)
+	//generateNewKeyPairs()
+	priv := &PrivateKey{
+		PublicKey: PublicKey{
+			G: fromHex(gHex),
+			P: fromHex(pHex),
+		},
+		X: fromHex("42"),
+	}
+	priv.Y = new(big.Int).Exp(priv.G, priv.X, priv.P)
+
+
+
 	//使用json解析出Commit结构体
 	c := new(Commit)
 	err := json.Unmarshal(content, c)
@@ -227,6 +248,14 @@ func (p *pbft) handleCommit(content []byte) {
 			//将消息信息，提交到本地消息池中！
 			localMessagePool = append(localMessagePool, p.messagePool[c.Digest].Message)
 			info := p.node.nodeID + "节点已将msgid:" + strconv.Itoa(p.messagePool[c.Digest].ID) + "存入本地消息池中,消息内容为：" + p.messagePool[c.Digest].Content
+			s:=strings.Split(p.messagePool[c.Digest].Content,"+")
+			c1_i,err =strconv.ParseInt(s[0], 10, 64)
+			c2_i,err =strconv.ParseInt(s[1], 10, 64)
+			decryptedData, err := Decrypt(priv, big.NewInt(c1_i), big.NewInt(c2_i))
+			if err != nil {
+				fmt.Println("error decrypting: %s", err)
+			}
+			fmt.Println("Decrypted Data: ", decryptedData)
 			fmt.Println(info)
 			fmt.Println("正在reply客户端 ...")
 			tcpDial([]byte(info), p.messagePool[c.Digest].ClientAddr)
