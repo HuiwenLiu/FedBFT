@@ -5,19 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="43496402-0e24-4d7d-90f6-98cbcb9f3266" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Keys/N0/N0_RSA_PIV" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Keys/N0/N0_RSA_PUB" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Keys/N1/N1_RSA_PIV" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Keys/N1/N1_RSA_PUB" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Keys/N2/N2_RSA_PIV" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Keys/N2/N2_RSA_PUB" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Keys/N3/N3_RSA_PIV" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Keys/N3/N3_RSA_PUB" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Keys/N4/N4_RSA_PIV" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Keys/N4/N4_RSA_PUB" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rsa.go" beforeDir="false" afterPath="$PROJECT_DIR$/rsa.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pbft.go" beforeDir="false" afterPath="$PROJECT_DIR$/pbft.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/voting" beforeDir="false" afterPath="$PROJECT_DIR$/voting" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +40,18 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>

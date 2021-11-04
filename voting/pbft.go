@@ -205,13 +205,13 @@ var c1_i int64
 var c2_i int64
 //处理提交确认消息
 func (p *pbft) handleCommit(content []byte) {
-	gHex, _ := randomHex(42)
-	pHex, _ := randomHex(42)
+	//gHex, _ := randomHex(42)
+	//pHex, _ := randomHex(42)
 	//generateNewKeyPairs()
 	priv := &PrivateKey{
 		PublicKey: PublicKey{
-			G: fromHex(gHex),
-			P: fromHex(pHex),
+			G: fromHex(generatorHex),
+			P: fromHex(primeHex),
 		},
 		X: fromHex("42"),
 	}
@@ -249,13 +249,32 @@ func (p *pbft) handleCommit(content []byte) {
 			localMessagePool = append(localMessagePool, p.messagePool[c.Digest].Message)
 			info := p.node.nodeID + "节点已将msgid:" + strconv.Itoa(p.messagePool[c.Digest].ID) + "存入本地消息池中,消息内容为：" + p.messagePool[c.Digest].Content
 			s:=strings.Split(p.messagePool[c.Digest].Content,"+")
+			fmt.Println("s[0]: ", s[0])
+			fmt.Println("s[1]: ", s[1])
+
+			n := new(big.Int)
+			n1, ok := n.SetString(s[0],10)
+			if !ok {
+				fmt.Println("SetString: error1")
+				return
+			}
+			n2, ok := n.SetString(s[1],10)
+			if !ok {
+				fmt.Println("SetString: error1")
+				return
+			}
+			fmt.Println("n1: ", n1)
+
+			fmt.Println("n2: ", n2)
+
 			c1_i,err =strconv.ParseInt(s[0], 10, 64)
 			c2_i,err =strconv.ParseInt(s[1], 10, 64)
-			decryptedData, err := Decrypt(priv, big.NewInt(c1_i), big.NewInt(c2_i))
+			//decryptedData, err := Decrypt(priv, big.NewInt(c1_i), big.NewInt(c2_i))
+			decryptedData, err := Decrypt(priv, n1, n2)
 			if err != nil {
 				fmt.Println("error decrypting: %s", err)
 			}
-			fmt.Println("Decrypted Data: ", decryptedData)
+			fmt.Println("Decrypted Data: ", string(decryptedData))
 			fmt.Println(info)
 			fmt.Println("正在reply客户端 ...")
 			tcpDial([]byte(info), p.messagePool[c.Digest].ClientAddr)

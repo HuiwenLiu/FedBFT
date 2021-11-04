@@ -44,6 +44,8 @@ func clientSendMessageAndListen() {
 		}
 		message := []byte(data)
 		c1, c2, err := Encrypt(rand.Reader, &priv.PublicKey, message)
+		fmt.Println("c1: ", c1)
+		fmt.Println("c2: ", c2)
 		if err != nil {
 			//t.Errorf("error encrypting: %s", err)
 			fmt.Println("error encrypting: %s", err)
