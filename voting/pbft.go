@@ -252,15 +252,17 @@ func (p *pbft) handleCommit(content []byte) {
 			fmt.Println("s[0]: ", s[0])
 			fmt.Println("s[1]: ", s[1])
 
-			n := new(big.Int)
-			n1, ok := n.SetString(s[0],10)
-			if !ok {
-				fmt.Println("SetString: error1")
+			n1 := new(big.Int)
+			n1, ok1 := n1.SetString(s[0],10)
+			if !ok1 {
+				fmt.Println("SetString: error s[0]")
 				return
 			}
-			n2, ok := n.SetString(s[1],10)
-			if !ok {
-				fmt.Println("SetString: error1")
+
+			n2 := new(big.Int)
+			n2, ok2 := n2.SetString(s[1],10)
+			if !ok2 {
+				fmt.Println("SetString: error s[1]")
 				return
 			}
 			fmt.Println("n1: ", n1)
