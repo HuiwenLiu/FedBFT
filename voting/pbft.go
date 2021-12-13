@@ -171,10 +171,12 @@ func (p *pbft) handlePrepare(content []byte) {
 		}
 		//因为主节点不会发送Prepare，所以不包含自己
 		specifiedCount := 0
-		if p.node.nodeID == "N0" {
+		if p.node.nodeID == "N0" { // server Node
 			specifiedCount = nodeCount / 3 * 2
-		} else {
+			//TODO: call server
+		} else { // N1, N2, N3 // privacy Node
 			specifiedCount = (nodeCount / 3 * 2) - 1
+			//TODO: call privacy peer
 		}
 		//如果节点至少收到了2f个prepare的消息（包括自己）,并且没有进行过commit广播，则进行commit广播
 		p.lock.Lock()
