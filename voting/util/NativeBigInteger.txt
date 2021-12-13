@@ -1,0 +1,69 @@
+package util
+
+import (
+	"math/big"
+)
+
+type NativeBigInteger struct {
+
+	_nativeOk                     bool
+	// final + static
+	_doLog                        bool
+	JBIGI_OPTIMIZATION_K6         string
+	JBIGI_OPTIMIZATION_K6_2       string
+	JBIGI_OPTIMIZATION_K6_3       string
+	JBIGI_OPTIMIZATION_ATHLON     string
+	JBIGI_OPTIMIZATION_ATHLON64   string
+	JBIGI_OPTIMIZATION_PENTIUM    string
+	JBIGI_OPTIMIZATION_PENTIUMMMX string
+	JBIGI_OPTIMIZATION_PENTIUM2   string
+	JBIGI_OPTIMIZATION_PENTIUM3   string
+	JBIGI_OPTIMIZATION_PENTIUM4   string
+	_isWin                        bool
+	_isMac                        bool
+	_isLinux                      bool
+	_isFreebsd                    bool
+	_isNix                        bool
+
+	_libPrefix string
+	_libSuffix string
+	sCPUType   string // ; //The CPU Type to optimize for (one of the above strings)
+
+}
+
+func (*NativeBigInteger) nativeModPow(base[] byte, exponent[] byte, modulus[] byte) *NativeBigInteger{
+
+
+
+func (*NativeBigInteger) NewNativeBigInteger1(val []byte) *NativeBigInteger {
+
+}
+
+func (*NativeBigInteger) NewNativeBigInteger2(signum int, magnitude []byte) *NativeBigInteger {
+
+}
+
+//func (*NativeBigInteger) NewNativeBigInteger3(bitlen int, certainty int, rnd rand) *NativeBigInteger {a
+//
+//}
+
+func (*NativeBigInteger) NewNativeBigInteger4(val string) *NativeBigInteger {
+
+}
+
+func (*NativeBigInteger) NewNativeBigInteger5(val string, radix int) *NativeBigInteger {
+
+}
+
+func (*NativeBigInteger) NewNativeBigInteger6(integer big.Int) *NativeBigInteger {
+
+}
+
+func (*NativeBigInteger) modPow(exponent big.Int) *NativeBigInteger {
+	if(_nativeOk)
+		return new NativeBigInteger{native}
+}
+
+func resolve() string {
+
+}

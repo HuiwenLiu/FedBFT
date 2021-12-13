@@ -38,6 +38,14 @@ func clientSendMessageAndListen() {
 
 	for {
 		data, err := stdReader.ReadString('\n')
+		values := []rune{}
+		for _, value := range data {
+			values = append(values, value)
+		}
+		fmt.Println("VALUES SLICE：", values)
+
+
+
 		if err != nil {
 			fmt.Println("Error reading from stdin")
 			panic(err)
