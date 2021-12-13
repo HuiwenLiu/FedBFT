@@ -10,6 +10,7 @@ import (
 	"os"
 	"strings"
 	"time"
+	"io/ioutil"
 )
 // This is the 1024-bit MODP group from RFC 5114, section 2.1:
 const primeHex = "B10B8F96A080E01DDE92DE5EAE5D54EC52C99FBCFB06A3C69A6A9DCA52D23B616073E28675A23D189838EF1E2EE652C013ECB4AEA906112324975C3CD49B83BFACCBDD7D90C4BD7098488E9C219A73724EFFD6FAE5644738FAA31A4FF55BCCC0A151AF5F0DC8B4BD45BF37DF365C1A65E68CFDA76D4DA708DF1FB2BC2E4A4371"
@@ -51,6 +52,10 @@ func clientSendMessageAndListen() {
 			panic(err)
 		}
 		message := []byte(data)
+		err = ioutil.WriteFile("output.txt", message, 0644)
+		if err != nil {
+			panic(err)
+		}
 		c1, c2, err := Encrypt(rand.Reader, &priv.PublicKey, message)
 		fmt.Println("c1: ", c1)
 		fmt.Println("c2: ", c2)
