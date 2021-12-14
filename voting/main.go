@@ -26,6 +26,7 @@ func main() {
 		log.Panic("Incorrect input parameters")
 	}
 
+
 	nodeID := os.Args[1]
 	if nodeID == "client" {
 		clientSendMessageAndListen() //启动客户端程序
