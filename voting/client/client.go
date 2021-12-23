@@ -78,7 +78,8 @@ func printWrap(client pb.RouteGuideClient, mtype string) {
 }
 
 func machineType(mtype string) *pb.Point {
-	jsonFile, err1 := os.Open("/root/grpc-go/examples/route_guide/testdata/route_guide_db.json")
+	fmt.Println("mtype:", mtype)
+	jsonFile, err1 := os.Open("/root/FedBFT/voting/testdata/route_guide_db.json")
 	// 最好要处理以下错误
 	if err1 != nil {
 		fmt.Println(err1)
@@ -104,12 +105,8 @@ func machineType(mtype string) *pb.Point {
 	// map[string] innerMap := mapResult["feature"]
 	// print map
 	for i, s := range ag.Feature {
-
-		// 	// 	fmt.Println("Key:", key, "=>", "Element:", element, "\n")
-		// 	// 	// 	// for kk, ee := range element {
-		// 	// 	// 	// 	fmt.Println("kk:", kkk, "=>", "ee:", ee, "\n")
-		// 	// 	// 	// }
 		fmt.Println(i, s.Location.Latitude)
+		fmt.Print("s.Name: ", s.Name)
 		if mtype == s.Name {
 			return &pb.Point{Latitude: int32(s.Location.Latitude), Longitude: int32(s.Location.Longitude)}
 		}

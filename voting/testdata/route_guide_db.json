@@ -1,0 +1,41 @@
+{
+    "feature": [
+      {
+          "location": {
+              "latitude": 1,
+              "longitude": 1
+          },
+          "name": "N1"
+      }, {
+          "location": {
+              "latitude": 2,
+              "longitude": 2
+          },
+          "name": "N2"
+      },{
+          "location": {
+              "latitude": 3,
+              "longitude": 3
+          },
+          "name": "N3"
+      },{
+          "location": {
+              "latitude": 4,
+              "longitude": 4
+          },
+          "name": "N4"
+      },{
+          "location": {
+              "latitude": 9999,
+              "longitude": 9999
+          },
+          "name": "N0"
+      },{
+          "location": {
+              "latitude": 1111,
+              "longitude": 1111
+          },
+          "name": "client"
+      }]
+  }
+  
