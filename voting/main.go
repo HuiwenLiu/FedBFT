@@ -33,11 +33,15 @@ func main() {
 
 	nodeID := os.Args[1]
 	if nodeID == "client" {
-		user_p := C.Main_c(nodeID)
+		user_p := func() string {
+			return C.Main_c(nodeID)
+		}
 		AsyncServiceOut(user_p, 2e9)
 		clientSendMessageAndListen() //启动客户端程序
 	} else if addr, ok := nodeTable[nodeID]; ok {
-		t12_p := C.Main_c(nodeID)
+		t12_p := func() string {
+			return C.Main_c(nodeID)
+		}
 		AsyncServiceOut(t12_p, 2e9)
 		p := NewPBFT(nodeID, addr)
 		go p.tcpListen() //启动节点
