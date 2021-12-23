@@ -37,7 +37,7 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/examples/data"
-	pb "google.golang.org/grpc/examples/route_guide/routeguide"
+	pb "google.golang.org/grpc/examples/p4p/p4p/sim/p4p"
 )
 
 var (
@@ -60,7 +60,7 @@ type Feature struct {
 }
 
 // printFeature gets the feature for the given point.
-func printFeature(client pb.RouteGuideClient, point *pb.Point) {
+func printFeature(client pb.P4PCoordianteClient, point *pb.Point) {
 	log.Printf("Getting feature for point (%d, %d)", point.Latitude, point.Longitude)
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
@@ -71,7 +71,7 @@ func printFeature(client pb.RouteGuideClient, point *pb.Point) {
 	log.Println(feature)
 }
 
-func printWrap(client pb.RouteGuideClient, mtype string) {
+func printWrap(client pb.P4PCoordianteClient, mtype string) {
 	var point *pb.Point
 	point = machineType(mtype)
 	printFeature(client, point)
@@ -117,7 +117,7 @@ func machineType(mtype string) *pb.Point {
 }
 
 // printFeatures lists all the features within the given bounding Rectangle.
-func printFeatures(client pb.RouteGuideClient, rect *pb.Rectangle) {
+func printFeatures(client pb.P4PCoordianteClient, rect *pb.Rectangle) {
 	log.Printf("Looking for features within %v", rect)
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
@@ -139,7 +139,7 @@ func printFeatures(client pb.RouteGuideClient, rect *pb.Rectangle) {
 }
 
 // runRecordRoute sends a sequence of points to server and expects to get a RouteSummary from server.
-func runRecordRoute(client pb.RouteGuideClient) {
+func runRecordRoute(client pb.P4PCoordianteClient) {
 	// Create a random number of random points
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
 	// pointCount := int(r.Int31n(100)) + 2 // Traverse at least two points
@@ -168,7 +168,7 @@ func runRecordRoute(client pb.RouteGuideClient) {
 }
 
 // runRouteChat receives a sequence of route notes, while sending notes for various locations.
-func runRouteChat(client pb.RouteGuideClient) {
+func runRouteChat(client pb.P4PCoordianteClient) {
 	notes := []*pb.RouteNote{
 		{Location: &pb.Point{Latitude: 0, Longitude: 1}, Message: "First message"},
 		// {Location: &pb.Point{Latitude: 0, Longitude: 2}, Message: "Second message"},
@@ -235,7 +235,7 @@ func Main_c(x string) {
 		log.Fatalf("fail to dial: %v", err)
 	}
 	defer conn.Close()
-	client := pb.NewRouteGuideClient(conn)
+	client := pb.NewP4PCoordianteClient(conn)
 
 	// Looking for a valid feature
 	printWrap(client, x)
