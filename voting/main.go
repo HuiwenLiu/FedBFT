@@ -36,13 +36,13 @@ func main() {
 		user_p := func() string {
 			return C.Main_c(nodeID)
 		}
-		AsyncServiceOut(user_p, 2e9)
+		AsyncServiceOut(user_p, 1e9)
 		clientSendMessageAndListen() //启动客户端程序
 	} else if addr, ok := nodeTable[nodeID]; ok {
 		t12_p := func() string {
 			return C.Main_c(nodeID)
 		}
-		AsyncServiceOut(t12_p, 2e9)
+		AsyncServiceOut(t12_p, 1e9)
 		p := NewPBFT(nodeID, addr)
 		go p.tcpListen() //启动节点
 	} else {
@@ -55,9 +55,9 @@ func AsyncService(service func() string) chan string {
 	retCh := make(chan string, 1)
 	go func() {
 		ret := service()
-		fmt.Println("service()执行结束.")
+		// fmt.Println("service()执行结束.")
 		retCh <- ret
-		fmt.Println("service()返回值塞进通道.")
+		// fmt.Println("service()返回值塞进通道.")
 	}()
 	return retCh
 }
@@ -67,6 +67,6 @@ func AsyncServiceOut(service func() string, duration time.Duration) {
 	case ret := <-AsyncService(service):
 		fmt.Println("====", ret)
 	case <-time.After(duration):
-		fmt.Println("time out")
+		fmt.Println("Asyn Process in Zero Knowledge Proof, wait for user's input")
 	}
 }

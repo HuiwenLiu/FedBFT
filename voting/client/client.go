@@ -66,7 +66,7 @@ func printFeature(client pb.P4PCoordianteClient, point *pb.Point) {
 	defer cancel()
 	feature, err := client.GetFeature(ctx, point)
 	if err != nil {
-		log.Fatalf("%v.GetFeatures(_) = _, %v: ", client, err)
+		log.Println("%v.GetFeatures(_) = _, %v: ", client, err)
 	}
 	log.Println(feature)
 }
