@@ -3,6 +3,8 @@ package main
 import (
 	"log"
 	"os"
+
+	C "./client"
 )
 
 const nodeCount = 4
@@ -15,6 +17,7 @@ var nodeTable map[string]string
 
 func main() {
 	//为四个节点生成公私钥
+	C.Main_c("x")
 	genRsaKeys()
 	nodeTable = map[string]string{
 		"N0": "127.0.0.1:8000",
@@ -25,7 +28,6 @@ func main() {
 	if len(os.Args) != 2 {
 		log.Panic("Incorrect input parameters")
 	}
-
 
 	nodeID := os.Args[1]
 	if nodeID == "client" {
