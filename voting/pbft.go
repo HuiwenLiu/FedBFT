@@ -174,9 +174,11 @@ func (p *pbft) handlePrepare(content []byte) {
 		if p.node.nodeID == "N0" { // server Node
 			specifiedCount = nodeCount / 3 * 2
 			//TODO: call server
+
 		} else { // N1, N2, N3 // privacy Node
 			specifiedCount = (nodeCount / 3 * 2) - 1
 			//TODO: call privacy peer
+
 		}
 		//如果节点至少收到了2f个prepare的消息（包括自己）,并且没有进行过commit广播，则进行commit广播
 		p.lock.Lock()
@@ -200,11 +202,11 @@ func (p *pbft) handlePrepare(content []byte) {
 	}
 }
 
-
 var receivedEncryptedData string
 var decryptedData string
 var c1_i int64
 var c2_i int64
+
 //处理提交确认消息
 func (p *pbft) handleCommit(content []byte) {
 	//gHex, _ := randomHex(42)
@@ -218,8 +220,6 @@ func (p *pbft) handleCommit(content []byte) {
 		X: fromHex("42"),
 	}
 	priv.Y = new(big.Int).Exp(priv.G, priv.X, priv.P)
-
-
 
 	//使用json解析出Commit结构体
 	c := new(Commit)
@@ -250,19 +250,19 @@ func (p *pbft) handleCommit(content []byte) {
 			//将消息信息，提交到本地消息池中！
 			localMessagePool = append(localMessagePool, p.messagePool[c.Digest].Message)
 			info := p.node.nodeID + "节点已将msgid:" + strconv.Itoa(p.messagePool[c.Digest].ID) + "存入本地消息池中,消息内容为：" + p.messagePool[c.Digest].Content
-			s:=strings.Split(p.messagePool[c.Digest].Content,"+")
+			s := strings.Split(p.messagePool[c.Digest].Content, "+")
 			fmt.Println("s[0]: ", s[0])
 			fmt.Println("s[1]: ", s[1])
 
 			n1 := new(big.Int)
-			n1, ok1 := n1.SetString(s[0],10)
+			n1, ok1 := n1.SetString(s[0], 10)
 			if !ok1 {
 				fmt.Println("SetString: error s[0]")
 				return
 			}
 
 			n2 := new(big.Int)
-			n2, ok2 := n2.SetString(s[1],10)
+			n2, ok2 := n2.SetString(s[1], 10)
 			if !ok2 {
 				fmt.Println("SetString: error s[1]")
 				return
@@ -271,8 +271,8 @@ func (p *pbft) handleCommit(content []byte) {
 
 			fmt.Println("n2: ", n2)
 
-			c1_i,err =strconv.ParseInt(s[0], 10, 64)
-			c2_i,err =strconv.ParseInt(s[1], 10, 64)
+			c1_i, err = strconv.ParseInt(s[0], 10, 64)
+			c2_i, err = strconv.ParseInt(s[1], 10, 64)
 			//decryptedData, err := Decrypt(priv, big.NewInt(c1_i), big.NewInt(c2_i))
 			decryptedData, err := Decrypt(priv, n1, n2)
 			if err != nil {

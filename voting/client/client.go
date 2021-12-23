@@ -214,7 +214,7 @@ func randomPoint(r *rand.Rand) *pb.Point {
 	return &pb.Point{Latitude: lat, Longitude: long}
 }
 
-func Main_c(x string) {
+func Main_c(x string) string {
 	flag.Parse()
 	var opts []grpc.DialOption
 	if *tls {
@@ -257,6 +257,7 @@ func Main_c(x string) {
 
 	// RecordRoute
 	runRecordRoute(client)
+	return "x"
 
 	// RouteChat
 	// runRouteChat(client)
