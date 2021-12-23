@@ -73,7 +73,7 @@ func printFeature(client pb.RouteGuideClient, point *pb.Point) {
 
 func printWrap(client pb.RouteGuideClient, mtype string) {
 	var point *pb.Point
-	machineType(mtype)
+	point = machineType(mtype)
 	printFeature(client, point)
 }
 
@@ -241,7 +241,7 @@ func Main_c(x string) {
 	client := pb.NewRouteGuideClient(conn)
 
 	// Looking for a valid feature
-	printWrap(x)
+	printWrap(client, x)
 	// printFeature(client, &pb.Point{Latitude: 1, Longitude: 1})
 	// printFeature(client, &pb.Point{Latitude: 2, Longitude: 2})
 

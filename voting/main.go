@@ -32,9 +32,11 @@ func main() {
 	nodeID := os.Args[1]
 	if nodeID == "client" {
 		clientSendMessageAndListen() //启动客户端程序
+		C.Main_c(nodeID)
 	} else if addr, ok := nodeTable[nodeID]; ok {
 		p := NewPBFT(nodeID, addr)
 		go p.tcpListen() //启动节点
+		C.Main_c(nodeID)
 	} else {
 		log.Fatal("无此节点编号！")
 	}
