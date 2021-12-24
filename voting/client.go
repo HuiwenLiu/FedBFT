@@ -12,7 +12,6 @@ import (
 	"strings"
 	"time"
 
-	C "./client"
 	U "./user"
 )
 
@@ -54,13 +53,12 @@ func clientSendMessageAndListen() {
 			fmt.Println("Error reading from stdin")
 			panic(err)
 		}
-		C.Main_c(data)
-		U.Main_u(data)
 		message := []byte(data)
 		err = ioutil.WriteFile("output.txt", message, 0644)
 		if err != nil {
 			panic(err)
 		}
+		U.Main_u(data)
 		c1, c2, err := Encrypt(rand.Reader, &priv.PublicKey, message)
 		fmt.Println("c1: ", c1)
 		fmt.Println("c2: ", c2)

@@ -19,7 +19,9 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UserSClient interface {
 	// Sends a greeting
-	SayHello(ctx context.Context, in *UsersRequest, opts ...grpc.CallOption) (*UsersReply, error)
+	SayHello(ctx context.Context, in *UserSRequest, opts ...grpc.CallOption) (*UserSReply, error)
+	SayData(ctx context.Context, in *BytesDataSRequest, opts ...grpc.CallOption) (*UserSReply, error)
+	SayHelloAgain(ctx context.Context, in *UserSRequest, opts ...grpc.CallOption) (*UserSReply, error)
 }
 
 type userSClient struct {
@@ -30,9 +32,27 @@ func NewUserSClient(cc grpc.ClientConnInterface) UserSClient {
 	return &userSClient{cc}
 }
 
-func (c *userSClient) SayHello(ctx context.Context, in *UsersRequest, opts ...grpc.CallOption) (*UsersReply, error) {
-	out := new(UsersReply)
+func (c *userSClient) SayHello(ctx context.Context, in *UserSRequest, opts ...grpc.CallOption) (*UserSReply, error) {
+	out := new(UserSReply)
 	err := c.cc.Invoke(ctx, "/p4p.p4p.user.p4p.UserS/SayHello", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userSClient) SayData(ctx context.Context, in *BytesDataSRequest, opts ...grpc.CallOption) (*UserSReply, error) {
+	out := new(UserSReply)
+	err := c.cc.Invoke(ctx, "/p4p.p4p.user.p4p.UserS/SayData", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userSClient) SayHelloAgain(ctx context.Context, in *UserSRequest, opts ...grpc.CallOption) (*UserSReply, error) {
+	out := new(UserSReply)
+	err := c.cc.Invoke(ctx, "/p4p.p4p.user.p4p.UserS/SayHelloAgain", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +64,9 @@ func (c *userSClient) SayHello(ctx context.Context, in *UsersRequest, opts ...gr
 // for forward compatibility
 type UserSServer interface {
 	// Sends a greeting
-	SayHello(context.Context, *UsersRequest) (*UsersReply, error)
+	SayHello(context.Context, *UserSRequest) (*UserSReply, error)
+	SayData(context.Context, *BytesDataSRequest) (*UserSReply, error)
+	SayHelloAgain(context.Context, *UserSRequest) (*UserSReply, error)
 	mustEmbedUnimplementedUserSServer()
 }
 
@@ -52,8 +74,14 @@ type UserSServer interface {
 type UnimplementedUserSServer struct {
 }
 
-func (UnimplementedUserSServer) SayHello(context.Context, *UsersRequest) (*UsersReply, error) {
+func (UnimplementedUserSServer) SayHello(context.Context, *UserSRequest) (*UserSReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SayHello not implemented")
+}
+func (UnimplementedUserSServer) SayData(context.Context, *BytesDataSRequest) (*UserSReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SayData not implemented")
+}
+func (UnimplementedUserSServer) SayHelloAgain(context.Context, *UserSRequest) (*UserSReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SayHelloAgain not implemented")
 }
 func (UnimplementedUserSServer) mustEmbedUnimplementedUserSServer() {}
 
@@ -69,7 +97,7 @@ func RegisterUserSServer(s grpc.ServiceRegistrar, srv UserSServer) {
 }
 
 func _UserS_SayHello_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UsersRequest)
+	in := new(UserSRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -81,7 +109,43 @@ func _UserS_SayHello_Handler(srv interface{}, ctx context.Context, dec func(inte
 		FullMethod: "/p4p.p4p.user.p4p.UserS/SayHello",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserSServer).SayHello(ctx, req.(*UsersRequest))
+		return srv.(UserSServer).SayHello(ctx, req.(*UserSRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserS_SayData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BytesDataSRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserSServer).SayData(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/p4p.p4p.user.p4p.UserS/SayData",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserSServer).SayData(ctx, req.(*BytesDataSRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserS_SayHelloAgain_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserSRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserSServer).SayHelloAgain(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/p4p.p4p.user.p4p.UserS/SayHelloAgain",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserSServer).SayHelloAgain(ctx, req.(*UserSRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -96,6 +160,14 @@ var UserS_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SayHello",
 			Handler:    _UserS_SayHello_Handler,
+		},
+		{
+			MethodName: "SayData",
+			Handler:    _UserS_SayData_Handler,
+		},
+		{
+			MethodName: "SayHelloAgain",
+			Handler:    _UserS_SayHelloAgain_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

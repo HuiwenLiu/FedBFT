@@ -38,6 +38,7 @@ var (
 	name      = flag.String("name", defaultName, "Name to greet")
 )
 
+//TODO: *&
 func Main_u(data string) {
 	flag.Parse()
 	// Set up a connection to the server.
@@ -51,7 +52,7 @@ func Main_u(data string) {
 	// Contact the server and print out its response.
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	r, err := c.SayHello(ctx, &pb.UsersRequest{Name: data})
+	r, err := c.SayHello(ctx, &pb.UserSRequest{Name: data})
 	if err != nil {
 		log.Fatalf("could not greet: %v", err)
 	}

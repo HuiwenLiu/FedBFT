@@ -24,15 +24,17 @@ package p4p.p4p.user.p4p;
 // The greeting service definition.
 service UserS {
   // Sends a greeting
-  rpc SayHello (UsersRequest) returns (UsersReply) {}
+  rpc SayHello (UserSRequest) returns (UserSReply) {}
+
+  rpc SayHelloAgain (UserSRequest) returns (UserSReply) {}
 }
 
 // The request message containing the user's name.
-message UsersRequest {
+message UserSRequest {
   string name = 1;
 }
 
 // The response message containing the greetings
-message UsersReply {
+message UserSReply {
   string message = 1;
 }
