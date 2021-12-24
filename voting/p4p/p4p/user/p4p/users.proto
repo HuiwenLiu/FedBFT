@@ -16,7 +16,7 @@ syntax = "proto3";
 
 option go_package = "google.golang.org/grpc/examples/p4p/p4p/user/p4p";
 option java_multiple_files = true;
-option java_package = "io.grpc.examples.p4p.p4p.user.p4p";
+option java_package = "io.grpc.examples.p4p.p4p.user";
 option java_outer_classname = "UserSProto";
 
 package p4p.p4p.user.p4p;
