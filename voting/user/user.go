@@ -38,7 +38,7 @@ var (
 	name = flag.String("name", defaultName, "Name to greet")
 )
 
-func Main_U(data string) {
+func Main_u(data string) {
 	flag.Parse()
 	// Set up a connection to the server.
 	conn, err := grpc.Dial(*addr, grpc.WithInsecure())
@@ -46,12 +46,12 @@ func Main_U(data string) {
 		log.Fatalf("did not connect: %v", err)
 	}
 	defer conn.Close()
-	c := pb.NewUsersClient(conn)
+	c := pb.NewUserDataClient(conn)
 
 	// Contact the server and print out its response.
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	r, err := c.SayHello(ctx, &pb.HelloRequest{Name: data})
+	r, err := c.SayHello(ctx, &pb.UsersRequest{Name: data})
 	if err != nil {
 		log.Fatalf("could not greet: %v", err)
 	}

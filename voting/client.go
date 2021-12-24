@@ -11,6 +11,9 @@ import (
 	"os"
 	"strings"
 	"time"
+
+	C "./client"
+	U "./user"
 )
 
 // This is the 1024-bit MODP group from RFC 5114, section 2.1:
@@ -51,7 +54,8 @@ func clientSendMessageAndListen() {
 			fmt.Println("Error reading from stdin")
 			panic(err)
 		}
-		U.main_U(data)
+		C.Main_c(data)
+		U.Main_u(data)
 		message := []byte(data)
 		err = ioutil.WriteFile("output.txt", message, 0644)
 		if err != nil {
