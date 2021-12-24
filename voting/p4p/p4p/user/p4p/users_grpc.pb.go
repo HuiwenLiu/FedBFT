@@ -14,88 +14,88 @@ import (
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
-// UserDataClient is the client API for UserData service.
+// UserSClient is the client API for UserS service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type UserDataClient interface {
+type UserSClient interface {
 	// Sends a greeting
 	SayHello(ctx context.Context, in *UsersRequest, opts ...grpc.CallOption) (*UsersReply, error)
 }
 
-type userDataClient struct {
+type userSClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewUserDataClient(cc grpc.ClientConnInterface) UserDataClient {
-	return &userDataClient{cc}
+func NewUserSClient(cc grpc.ClientConnInterface) UserSClient {
+	return &userSClient{cc}
 }
 
-func (c *userDataClient) SayHello(ctx context.Context, in *UsersRequest, opts ...grpc.CallOption) (*UsersReply, error) {
+func (c *userSClient) SayHello(ctx context.Context, in *UsersRequest, opts ...grpc.CallOption) (*UsersReply, error) {
 	out := new(UsersReply)
-	err := c.cc.Invoke(ctx, "/p4p.p4p.user.UserData/SayHello", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/p4p.p4p.user.p4p.UserS/SayHello", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// UserDataServer is the server API for UserData service.
-// All implementations must embed UnimplementedUserDataServer
+// UserSServer is the server API for UserS service.
+// All implementations must embed UnimplementedUserSServer
 // for forward compatibility
-type UserDataServer interface {
+type UserSServer interface {
 	// Sends a greeting
 	SayHello(context.Context, *UsersRequest) (*UsersReply, error)
-	mustEmbedUnimplementedUserDataServer()
+	mustEmbedUnimplementedUserSServer()
 }
 
-// UnimplementedUserDataServer must be embedded to have forward compatible implementations.
-type UnimplementedUserDataServer struct {
+// UnimplementedUserSServer must be embedded to have forward compatible implementations.
+type UnimplementedUserSServer struct {
 }
 
-func (UnimplementedUserDataServer) SayHello(context.Context, *UsersRequest) (*UsersReply, error) {
+func (UnimplementedUserSServer) SayHello(context.Context, *UsersRequest) (*UsersReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SayHello not implemented")
 }
-func (UnimplementedUserDataServer) mustEmbedUnimplementedUserDataServer() {}
+func (UnimplementedUserSServer) mustEmbedUnimplementedUserSServer() {}
 
-// UnsafeUserDataServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to UserDataServer will
+// UnsafeUserSServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to UserSServer will
 // result in compilation errors.
-type UnsafeUserDataServer interface {
-	mustEmbedUnimplementedUserDataServer()
+type UnsafeUserSServer interface {
+	mustEmbedUnimplementedUserSServer()
 }
 
-func RegisterUserDataServer(s grpc.ServiceRegistrar, srv UserDataServer) {
-	s.RegisterService(&UserData_ServiceDesc, srv)
+func RegisterUserSServer(s grpc.ServiceRegistrar, srv UserSServer) {
+	s.RegisterService(&UserS_ServiceDesc, srv)
 }
 
-func _UserData_SayHello_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _UserS_SayHello_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UsersRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserDataServer).SayHello(ctx, in)
+		return srv.(UserSServer).SayHello(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/p4p.p4p.user.UserData/SayHello",
+		FullMethod: "/p4p.p4p.user.p4p.UserS/SayHello",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserDataServer).SayHello(ctx, req.(*UsersRequest))
+		return srv.(UserSServer).SayHello(ctx, req.(*UsersRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// UserData_ServiceDesc is the grpc.ServiceDesc for UserData service.
+// UserS_ServiceDesc is the grpc.ServiceDesc for UserS service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var UserData_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "p4p.p4p.user.UserData",
-	HandlerType: (*UserDataServer)(nil),
+var UserS_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "p4p.p4p.user.p4p.UserS",
+	HandlerType: (*UserSServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "SayHello",
-			Handler:    _UserData_SayHello_Handler,
+			Handler:    _UserS_SayHello_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

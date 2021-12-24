@@ -1,4 +1,4 @@
-// Copyright 2015 gRPC authors.
+ // Copyright 2015 gRPC authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,10 +19,10 @@ option java_multiple_files = true;
 option java_package = "io.grpc.examples.p4p.p4p.user.p4p";
 option java_outer_classname = "UserSProto";
 
-package p4p.p4p.user;
+package p4p.p4p.user.p4p;
 
 // The greeting service definition.
-service UserData {
+service UserS {
   // Sends a greeting
   rpc SayHello (UsersRequest) returns (UsersReply) {}
 }
